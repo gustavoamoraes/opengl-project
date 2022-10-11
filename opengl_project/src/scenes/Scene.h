@@ -3,37 +3,20 @@
 #include <string>
 #include <vector>
 #include <functional>
-namespace scene
+#include "Entity.h"
+
+class Scene
 {
-	class Scene
-	{
-		public:
-			Scene() {};
-			virtual ~Scene() {};
+	public:
+		Scene() {};
+		~Scene() {};
 
-			virtual void OnUpdate() {};
-			virtual void OnRender() {};
-			virtual void OnImGUIRender() {};
-	};
+		virtual void OnUpdate();
+		virtual void OnImGUIRender() {};
 
-	class SceneMenu : public Scene
-	{
-		public:
-			SceneMenu(Scene*& firstScene);
-			~SceneMenu() {};
+		void AddEntity(Entity* entiry);
+		//Camera mainCamera;
 
-			void OnImGUIRender();
-			void OnRender();
-
-			template<typename T>
-			void AddScene(const std::string& name)
-			{
-				m_Scenes.push_back(std::make_pair(name, []() { return new T(); }));
-			}
-
-			Scene*& m_CurrentScene;
-
-		private:
-			std::vector<std::pair<std::string, std::function<Scene*()>>> m_Scenes;
-	};
-}
+private:
+	std::vector<Entity*> m_Entities;
+};

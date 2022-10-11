@@ -2,7 +2,7 @@
 
 #include <GL/glew.h>
 
-#include "IndexBuffer.h"
+#include "Buffer.h"
 #include "VertexArray.h"
 #include "Shader.h"
 
@@ -17,6 +17,6 @@ bool GLLogCall(const char* function, int line, const char* file);
 class Renderer
 {
 	public:
-		void Draw(const IndexBuffer& ib, const VertexArray& va, const Shader& shader) const;
-		void Clear();
+		static void Draw(const Shader& shader, const VertexArray& vertexArray, size_t trianglesCount);
+		static void Clear();
 };

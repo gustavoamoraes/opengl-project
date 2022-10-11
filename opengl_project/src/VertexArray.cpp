@@ -1,8 +1,7 @@
 #include <gl/glew.h>
 #include "Renderer.h"
 
-#include "VertexBufferLayout.h"
-#include "VertexBuffer.h"
+#include "Buffer.h"
 #include "VertexArray.h"
 
 VertexArray::VertexArray()
@@ -14,6 +13,13 @@ VertexArray::VertexArray()
 VertexArray::~VertexArray()
 {
     GLCall(glDeleteVertexArrays(1, &m_RendererID));
+}
+
+void VertexArray::SetIndexBuffer(const IndexBuffer& indexBuffer)
+{
+    glBindVertexArray(m_RendererID);
+    indexBuffer.Bind();
+    m_IndexBuffer = std::make_shared<IndexBuffer>(indexBuffer);
 }
 
 void VertexArray::Bind() const

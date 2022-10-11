@@ -1,6 +1,7 @@
 #include "Shader.h"
 #include "Renderer.h"
 
+#include <filesystem>
 #include <iostream>
 #include <fstream>
 #include <sstream>
@@ -71,6 +72,9 @@ unsigned int Shader::CompileShader(unsigned int type, const std::string& source)
 ShaderProgramSource Shader::ParseShader(const std::string& dir) const
 {
     std::ifstream stream(dir);
+
+    if (!stream.good())
+        throw "File does not exist!";
 
     enum class ShaderType
     {
