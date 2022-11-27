@@ -17,6 +17,9 @@ bool GLLogCall(const char* function, int line, const char* file);
 class Renderer
 {
 	public:
-		static void Draw(const Shader& shader, const VertexArray& vertexArray, size_t trianglesCount);
+		static void Init();
+		static void Draw();
+		static void DrawQuad(const glm::mat4 transform);
+		static void Flush();
 		static void Clear();
 };

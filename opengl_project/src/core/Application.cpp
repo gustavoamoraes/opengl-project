@@ -7,7 +7,6 @@
 #include "Renderer.h"
 #include "scenes/TestScene/MainScene.h"
 #include "Gui.h"
-#include "Event.h"
 #include "Scene.h"
 
 #include "imgui/imgui.h"
@@ -26,6 +25,8 @@ void Application::Run()
 {
 	m_Gui->Setup();
 
+	Renderer::Init();
+
 	while (m_Running)
 	{
 		Renderer::Clear();
@@ -39,7 +40,7 @@ void Application::Run()
 			m_Gui->End();
 		}
 
-		Event::current = Event();
+		Renderer::Draw();
 		m_Window->OnUpdate();
 	}
 }

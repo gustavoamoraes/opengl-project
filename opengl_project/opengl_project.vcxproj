@@ -29,13 +29,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -123,10 +123,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Users\Gustavo\Documents\Projects\opengl-project\Dependencies\GLFW\include;C:\Users\Gustavo\Documents\Projects\opengl-project\Dependencies\GLEW\include;C:\Users\Gustavo\Documents\Projects\opengl-project\opengl_project\src\vendor;C:\Users\Gustavo\Documents\Projects\opengl-project\opengl_project\src\scenes;C:\Users\Gustavo\Documents\Projects\opengl-project\opengl_project\src;C:\Users\Gustavo\Documents\Projects\opengl-project\opengl_project\src\core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Gustavo\Documents\Projects\opengl-project\Dependencies\GLFW\lib-vc20;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -290,14 +292,12 @@
     <ClInclude Include="src\core\Application.h" />
     <ClInclude Include="src\core\Gui.h" />
     <ClInclude Include="src\Buffer.h" />
-    <ClInclude Include="src\Event.h" />
-    <ClInclude Include="src\KeyCodes.h" />
     <ClInclude Include="src\scenes\Entity.h" />
     <ClInclude Include="src\scenes\TestScene\MainScene.h" />
     <ClInclude Include="src\scenes\TestScene\Player.h" />
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\scenes\Scene.h" />
-    <ClInclude Include="src\Texture.h" />
+    <ClInclude Include="src\Transform.h" />
     <ClInclude Include="src\vendor\glm\common.hpp" />
     <ClInclude Include="src\vendor\glm\detail\compute_common.hpp" />
     <ClInclude Include="src\vendor\glm\detail\compute_vector_relational.hpp" />
@@ -599,14 +599,13 @@
     <ClCompile Include="src\Buffer.cpp" />
     <ClCompile Include="src\core\Application.cpp" />
     <ClCompile Include="src\core\Gui.cpp" />
-    <ClCompile Include="src\Event.cpp" />
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\scenes\Entity.cpp" />
     <ClCompile Include="src\scenes\TestScene\Player.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\scenes\Scene.cpp" />
-    <ClCompile Include="src\Texture.cpp" />
+    <ClCompile Include="src\Transform.cpp" />
     <ClCompile Include="src\vendor\glm\detail\glm.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui.cpp" />
     <ClCompile Include="src\vendor\imgui\imgui_demo.cpp" />

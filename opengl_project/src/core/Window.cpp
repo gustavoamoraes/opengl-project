@@ -3,7 +3,6 @@
 #include "Window.h"
 #include "Renderer.h"
 #include "Application.h"
-#include "Event.h"
 
 Window::Window(const std::string& title, unsigned int width, unsigned int height) :
 	m_Title(title), m_Width(width), m_Height(height)
@@ -32,11 +31,6 @@ Window::Window(const std::string& title, unsigned int width, unsigned int height
 	glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 	{
 		Application::GetInstance()->OnWindowClosed();
-	});
-
-	glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods)
-	{
-		Event::current = Event::KeyEvent(key, action);
 	});
 
 	glewInit();
