@@ -13,12 +13,13 @@ public:
 	~Player();
 
 	void Update() override;
-	//void Setup() override;
 
 private:
 	const int m_PlaneWidthUnits = 1;
 	const int m_PlaneDepthUnits = 1;
-
+	float m_Angle = 0;
 	Transform m_PlayerTransform;
+	Transform m_TestTransform;
+	Mesh m_Cube;
 	const float m_PlayerSpeed = 0.05f;
 };

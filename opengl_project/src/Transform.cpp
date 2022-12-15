@@ -18,11 +18,10 @@ Transform::~Transform()
 void Transform::LookAt(glm::vec3 vec)
 {
     glm::vec3 dir = glm::normalize(vec);
-
     glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f);
     glm::vec3 right = glm::vec3(1.0f, 0.0f, 0.0f);
 
-    float dot = glm::dot(up, dir);
+    float dot = abs(glm::dot(up, dir));
 
     if (fabs(dot - 1.0f) < 0.0001f) 
     {

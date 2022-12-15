@@ -289,6 +289,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Renderer.h" />
+    <ClInclude Include="src\Camera.h" />
     <ClInclude Include="src\core\Application.h" />
     <ClInclude Include="src\core\Gui.h" />
     <ClInclude Include="src\Buffer.h" />

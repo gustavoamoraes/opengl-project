@@ -25,7 +25,7 @@ void Application::Run()
 {
 	m_Gui->Setup();
 
-	Renderer::Init();
+	//Renderer::Init();
 
 	while (m_Running)
 	{
@@ -40,7 +40,6 @@ void Application::Run()
 			m_Gui->End();
 		}
 
-		Renderer::Draw();
 		m_Window->OnUpdate();
 	}
 }

@@ -12,7 +12,6 @@ public:
 	MainScene()
 	{	
 		Player* player = new Player();
-		player->m_Active = true;
 		AddEntity(player);
 	};
 };
