@@ -1,6 +1,6 @@
 #pragma once
 
-#include "./scenes/Entity.h"
+#include "Entity.h"
 #include "Renderer.h"
 #include "Shader.h"
 #include "Transform.h"
@@ -21,5 +21,4 @@ private:
 	Transform m_PlayerTransform;
 	Transform m_TestTransform;
 	Mesh m_Cube;
-	const float m_PlayerSpeed = 0.05f;
 };

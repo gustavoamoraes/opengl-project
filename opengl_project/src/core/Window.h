@@ -14,9 +14,11 @@ public:
 
 	void SetVSync(bool enabled);
 	void SetOnEventCallback(const std::function<void(int, void*)> cb) { m_Data.m_OnEventCallback = cb; };
-	void onKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	GLFWwindow* GetNativeWindow();
 	void OnUpdate();
+
+	unsigned int m_Width;
+	unsigned int m_Height;
 	
 private:
 
@@ -26,8 +28,6 @@ private:
 	};
 
 	GLFWwindow* m_Window;
-	unsigned int m_Width;
-	unsigned int m_Height;
 	const std::string m_Title;
 	WindowData m_Data;
 };

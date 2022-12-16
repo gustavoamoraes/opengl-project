@@ -33,6 +33,8 @@ Window::Window(const std::string& title, unsigned int width, unsigned int height
 		Application::GetInstance()->OnWindowClosed();
 	});
 
+	glfwSetInputMode(m_Window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+
 	glewInit();
 }
 
