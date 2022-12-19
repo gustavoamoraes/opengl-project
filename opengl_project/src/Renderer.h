@@ -21,6 +21,7 @@ public:
     struct Vertex
     {
         glm::vec3 position = { 0,0,0 };
+        glm::vec2 texCoord = { 0,0 };
     };
 
     Shader* m_Shader;
@@ -31,6 +32,7 @@ public:
 
     void SetTriangles(const unsigned int* triangles, unsigned int count);
     void SetVertices(Vertex* vertices, unsigned int count);
+
     void Select();
 
 private:
@@ -39,7 +41,6 @@ private:
     IndexBuffer* m_IndexBuffer;
     VertexBufferLayout m_Layout;
 };
-
 
 class Renderer
 {

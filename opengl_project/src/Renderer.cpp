@@ -13,11 +13,14 @@ void GLClearErrors()
 Mesh::Mesh() : m_TriangleCount(0), m_VerticeCount(0)
 {
     m_Shader = new Shader("res/shaders/basic_shader.shader");
+
     m_VertexArray = new VertexArray();
     m_IndexBuffer = new IndexBuffer();
     m_VertexBuffer = new VertexBuffer();
 
     m_Layout.Push<float>(3); //Position
+    //m_Layout.Push<float>(4); //Color
+    m_Layout.Push<float>(2); //Texture Coordinate
 
     m_VertexArray->AddBuffer(m_Layout, *m_VertexBuffer);
 }
@@ -55,7 +58,7 @@ bool GLLogCall(const char* function, int line, const char* file)
 void Renderer::DrawMesh(Mesh& mesh, const glm::mat4 meshTransform, const glm::mat4 viewProjection)
 {
     mesh.m_Shader->Bind();
-    mesh.m_Shader->SetUniforms4f("u_Color", .5f, 0.0f, .5f, 0.0f);
+    //mesh.m_Shader->SetUniforms4f("u_Color", .5f, 0.0f, .5f, 0.0f);
     mesh.m_Shader->SetUniformsMat4f("u_Transform", meshTransform);
     mesh.m_Shader->SetUniformsMat4f("u_ViewProjection", viewProjection);
 

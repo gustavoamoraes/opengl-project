@@ -1,5 +1,6 @@
 #include <malloc.h>  
 #include <iostream>
+#include <vector>
 
 #include "imgui/imgui.h"
 #include "Player.h"
@@ -14,18 +15,63 @@
 
 Player::Player()
 {
+	m_TextureTest = new Texture("res/textures/a.png");
+
+	m_TextureTest->Bind();
+
+	/*glm::vec3 vertices[]
+	{
+		glm::vec3(0.5f,  0.5f, 0.5f),
+		glm::vec3(-0.5f,  0.5f, 0.5f),
+		glm::vec3(0.5f, 0.5f, -0.5f),
+		glm::vec3(-0.5f, 0.5f, -0.5f),
+
+		glm::vec3(0.5f, -0.5f, 0.5f),
+		glm::vec3(-0.5f, -0.5f, 0.5f),
+		glm::vec3(0.5f, -0.5f, -0.5f),
+		glm::vec3(-0.5f, -0.5f, -0.5f),
+	};*/
+
 	Mesh::Vertex vertices[]
 	{
-		glm::vec3(-0.5f, -0.5f, 0.0f),
-		glm::vec3(0.5f, -0.5f, 0.0f),
-		glm::vec3(0.5f,  0.5f, 0.0f),
-		glm::vec3(-0.5f,  0.5f, 0.0f)
+		glm::vec3(0.5f,  0.5f, 0.5f), glm::vec2(0.0f,  0.0f),
+		glm::vec3(-0.5f,  0.5f, 0.5f), glm::vec2(1.0f,  0.0f),
+		glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(0.0f,  1.0f),
+		glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(1.0f,  1.0f),
+		glm::vec3(0.5f, 0.5f, -1.5f), glm::vec2(0.0f,  2.0f),
+		glm::vec3(-0.5f, 0.5f, -1.5f), glm::vec2(1.0f,  2.0f),
+
+		/*glm::vec3(0.5f, -0.5f, 0.5f), glm::vec2(0.0f,  0.0f),
+		glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(0.0f,  1.0f),
+		glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f,  0.0f),
+		glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(1.0f,  1.0f),*/
 	};
 
-	unsigned int triangles[]{ 0,1,2,2,3,0 };
 
-	m_Cube.SetTriangles(triangles, 6);
-	m_Cube.SetVertices(vertices, 4);
+	unsigned int triangles[]
+	{
+		3,1,2,2,1,0,
+		5,3,4,4,3,2,
+	};
+	/*std::vector<unsigned int> triangles;
+
+	int verticeIndicies[]{ 0,1,2,3,4,5,6,7 };
+	bool visibleSides[] {true, true, true, false, false, true };
+
+	for (size_t i = 0; i < 6; i++)
+	{
+		if (!visibleSides[i])
+			continue;
+
+		for (size_t j = 0; j < 6; j++)
+		{
+			int index = m_Sides[i][j];
+			triangles.push_back(verticeIndicies[index]);
+		}
+	}*/
+
+	m_Cube.SetTriangles(&triangles[0], 6*2);
+	m_Cube.SetVertices(&vertices[0], 6);
 }
 
 void Player::Update()

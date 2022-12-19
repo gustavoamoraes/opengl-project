@@ -1348,6 +1348,9 @@
     <ClInclude Include="src\scenes\TestScene\CameraController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Renderer.cpp">
@@ -1417,6 +1420,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\scenes\TestScene\CameraController.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SRC\Texture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
