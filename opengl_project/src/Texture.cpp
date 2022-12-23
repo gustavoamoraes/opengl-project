@@ -1,20 +1,30 @@
 #include "Texture.h"
-
+#include "Renderer.h"
 #include <GL/glew.h>
 
-Texture::Texture(const std::string& path) : m_Path(path)
+Texture::Texture(const std::string& path) : m_Path(path), m_Height(0), m_Width(0), m_RendererID(-1)
 {
-	int width, height, channels;
+	GLsizei tileWidth = 16;
+	GLsizei tileHeight = 16;
+
+	GLsizei imageWidth;
+	GLsizei imageHeight;
+
+	GLsizei tileCount = 4;
+	GLsizei mipLevelCount = 1;
+
+	GLsizei channels;
+
 	stbi_set_flip_vertically_on_load(0);
 
-	stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);;
+	stbi_uc* data = stbi_load(path.c_str(), &imageWidth, &imageHeight, &channels, 0);
 
 	if (data != nullptr)
 	{
 		m_IsLoaded = true;
 
-		m_Width = width;
-		m_Height = height;
+		m_Width = imageWidth;
+		m_Height = imageHeight;
 
 		GLenum internalFormat = 0, dataFormat = 0;
 
@@ -29,16 +39,35 @@ Texture::Texture(const std::string& path) : m_Path(path)
 			dataFormat = GL_RGB;
 		}
 
-		glCreateTextures(GL_TEXTURE_2D, 1, &m_RendererID);
-		glTextureStorage2D(m_RendererID, 1, internalFormat, m_Width, m_Height);
+		GLsizei tileColumns = imageWidth / tileWidth;
+		GLsizei tileRows = imageHeight / tileHeight;
 
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glGenTextures(1, &m_RendererID);
+		glBindTexture(GL_TEXTURE_2D_ARRAY, m_RendererID);
 
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTextureParameteri(m_RendererID, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		GLCall(glTexStorage3D(GL_TEXTURE_2D_ARRAY, mipLevelCount, GL_RGBA8, tileWidth, tileHeight, tileCount));
 
-		glTextureSubImage2D(m_RendererID, 0, 0, 0, m_Width, m_Height, dataFormat, GL_UNSIGNED_BYTE, data);
+		glPixelStorei(GL_UNPACK_ROW_LENGTH, imageWidth); // width
+		glPixelStorei(GL_UNPACK_IMAGE_HEIGHT, imageHeight); // height
+
+		// Always set reasonable texture parameters
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D_ARRAY, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		
+		for (size_t y = 0; y < tileRows; y++)
+		{
+			for (size_t x = 0; x < tileColumns; x++)
+			{
+				size_t tileIndex = y * tileColumns + x;
+
+				size_t pixelOffsetX = x*tileWidth;
+				size_t pixelOffsetY = y*tileHeight*imageHeight;
+
+				GLCall(glTexSubImage3D(GL_TEXTURE_2D_ARRAY, 0, 0, 0, tileIndex, tileWidth, tileHeight, 1, GL_RGBA, GL_UNSIGNED_BYTE, data + channels * (pixelOffsetX + pixelOffsetY)));
+			}
+		}
 
 		stbi_image_free(data);
 	}
@@ -46,6 +75,7 @@ Texture::Texture(const std::string& path) : m_Path(path)
 
 void Texture::Bind(uint32_t slot) const
 {
+	//glBindTexture(GL_TEXTURE_2D_ARRAY, m_RendererID);
 	glBindTextureUnit(slot, m_RendererID);
 }
 

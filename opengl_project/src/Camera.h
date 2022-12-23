@@ -2,6 +2,7 @@
 
 #include "Transform.h"
 
+#include <gl/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
 
@@ -16,6 +17,12 @@ public:
 	glm::mat4 getViewProjectionMatrix()
 	{
 		return glm::perspective(m_Fovy, m_Aspect, m_Near, m_Far) * glm::inverse(m_Transform.GetMatrix());
+	}
+
+	//RGB: 0 -> 255
+	void SetBackgroundColor(glm::ivec3 color)
+	{
+		glClearColor(color.r/ 255.0f, color.g/ 255.0f, color.b/255.0f, 1.0f);
 	}
 
 private:

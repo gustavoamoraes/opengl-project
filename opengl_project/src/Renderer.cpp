@@ -64,6 +64,8 @@ void Renderer::DrawMesh(Mesh& mesh, const glm::mat4 meshTransform, const glm::ma
 
     mesh.Select();
 
+
+
     GLCall(glDrawElements(GL_TRIANGLES, mesh.m_TriangleCount, GL_UNSIGNED_INT, nullptr));
 }
 

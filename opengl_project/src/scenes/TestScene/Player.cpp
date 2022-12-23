@@ -15,7 +15,9 @@
 
 Player::Player()
 {
-	m_TextureTest = new Texture("res/textures/a.png");
+	m_MyScene->m_MainCamera.SetBackgroundColor({ 34, 128, 161 });
+
+	m_TextureTest = new Texture("res/textures/c.png");
 
 	m_TextureTest->Bind();
 
@@ -34,28 +36,19 @@ Player::Player()
 
 	Mesh::Vertex vertices[]
 	{
-		glm::vec3(0.5f,  0.5f, 0.5f), glm::vec2(0.0f,  0.0f),
-		glm::vec3(-0.5f,  0.5f, 0.5f), glm::vec2(1.0f,  0.0f),
-		glm::vec3(0.5f, 0.5f, -0.5f), glm::vec2(0.0f,  1.0f),
-		glm::vec3(-0.5f, 0.5f, -0.5f), glm::vec2(1.0f,  1.0f),
-		glm::vec3(0.5f, 0.5f, -1.5f), glm::vec2(0.0f,  2.0f),
-		glm::vec3(-0.5f, 0.5f, -1.5f), glm::vec2(1.0f,  2.0f),
-
-		/*glm::vec3(0.5f, -0.5f, 0.5f), glm::vec2(0.0f,  0.0f),
-		glm::vec3(-0.5f, -0.5f, 0.5f), glm::vec2(0.0f,  1.0f),
-		glm::vec3(0.5f, -0.5f, -0.5f), glm::vec2(1.0f,  0.0f),
-		glm::vec3(-0.5f, -0.5f, -0.5f), glm::vec2(1.0f,  1.0f),*/
+		glm::vec3(0.0f,  0.0f, 0.0f), glm::vec2(0.0f,0.0f),
+		glm::vec3(1.0f,  0.0f, 0.0f), glm::vec2(1.0f,0.0f),	
+		glm::vec3(0.0f, 0.0f, 1.0f), glm::vec2(0.0f, 1.0f),
+		glm::vec3(1.0f, 0.0f, 1.0f), glm::vec2(1.0f,1.0f),
+		glm::vec3(0.0f, 0.0f, 2.0f), glm::vec2(0.0f, 2.0f),
+		glm::vec3(1.0f, 0.0f, 2.0f), glm::vec2(1.0f,2.0f)
 	};
 
-
-	unsigned int triangles[]
-	{
-		3,1,2,2,1,0,
-		5,3,4,4,3,2,
-	};
+	unsigned int triangles[] { 0,1,2,2,1,3, 2,3,4,4,3,5 };
+	
 	/*std::vector<unsigned int> triangles;
 
-	int verticeIndicies[]{ 0,1,2,3,4,5,6,7 };
+	int verticeIndicies[]{0,1,2,3,4,5,6,7};
 	bool visibleSides[] {true, true, true, false, false, true };
 
 	for (size_t i = 0; i < 6; i++)

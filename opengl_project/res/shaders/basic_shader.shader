@@ -9,12 +9,14 @@ uniform mat4 u_Transform;
 uniform mat4 u_ViewProjection;
 //out vec4 v_VertexColor;
 out vec2 v_TexCoord;
+out vec3 v_Position;
 
 void main()
 {
 	//u_VertexColor = color;
 	v_TexCoord = a_TexCoord;
 	gl_Position = u_ViewProjection * u_Transform * vec4(position, 1.0);
+	v_Position = position;
 };
 
 #shader fragment
@@ -23,10 +25,13 @@ void main()
 out vec4 color;
 //in vec4 v_VertexColor;
 in vec2 v_TexCoord;
+in vec3 v_Position;
+
 uniform vec4 u_Color;
-uniform sampler2D u_Texture;
+uniform sampler2DArray u_Texture;
 
 void main()
 {
-	color = texture(u_Texture, v_TexCoord);
+	//color = texture(u_Texture, vec3(v_TexCoord.xy, ceil(v_TexCoord.z)), 0);
+	color = vec4(floor(v_Position.z),0,0, 1.0);
 };

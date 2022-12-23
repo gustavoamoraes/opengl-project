@@ -21,7 +21,7 @@ public:
     struct Vertex
     {
         glm::vec3 position = { 0,0,0 };
-        glm::vec2 texCoord = { 0,0 };
+        glm::vec2 texCoord = { 0,0};
     };
 
     Shader* m_Shader;
