@@ -296,7 +296,7 @@
     <ClInclude Include="src\scenes\Entity.h" />
     <ClInclude Include="src\scenes\TestScene\CameraController.h" />
     <ClInclude Include="src\scenes\TestScene\MainScene.h" />
-    <ClInclude Include="src\scenes\TestScene\Player.h" />
+    <ClInclude Include="src\scenes\TestScene\Chunck.h" />
     <ClInclude Include="src\Shader.h" />
     <ClInclude Include="src\scenes\Scene.h" />
     <ClInclude Include="src\Texture.h" />
@@ -606,7 +606,7 @@
     <ClCompile Include="src\Renderer.cpp" />
     <ClCompile Include="src\scenes\Entity.cpp" />
     <ClCompile Include="src\scenes\TestScene\CameraController.cpp" />
-    <ClCompile Include="src\scenes\TestScene\Player.cpp" />
+    <ClCompile Include="src\scenes\TestScene\Chunck.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\scenes\Scene.cpp" />
     <ClCompile Include="SRC\Texture.cpp" />

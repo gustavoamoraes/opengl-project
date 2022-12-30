@@ -1330,7 +1330,7 @@
     <ClInclude Include="src\Buffer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\scenes\TestScene\Player.h">
+    <ClInclude Include="src\scenes\TestScene\Chunck.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\scenes\Entity.h">
@@ -1407,7 +1407,7 @@
     <ClCompile Include="src\Buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\scenes\TestScene\Player.cpp">
+    <ClCompile Include="src\scenes\TestScene\Chunck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Input.cpp">

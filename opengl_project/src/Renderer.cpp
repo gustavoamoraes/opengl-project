@@ -18,9 +18,8 @@ Mesh::Mesh() : m_TriangleCount(0), m_VerticeCount(0)
     m_IndexBuffer = new IndexBuffer();
     m_VertexBuffer = new VertexBuffer();
 
-    m_Layout.Push<float>(3); //Position
-    //m_Layout.Push<float>(4); //Color
-    m_Layout.Push<float>(2); //Texture Coordinate
+    m_Layout.Push<unsigned int>(1);
+    //m_Layout.Push<int>(1);
 
     m_VertexArray->AddBuffer(m_Layout, *m_VertexBuffer);
 }
@@ -58,13 +57,11 @@ bool GLLogCall(const char* function, int line, const char* file)
 void Renderer::DrawMesh(Mesh& mesh, const glm::mat4 meshTransform, const glm::mat4 viewProjection)
 {
     mesh.m_Shader->Bind();
-    //mesh.m_Shader->SetUniforms4f("u_Color", .5f, 0.0f, .5f, 0.0f);
     mesh.m_Shader->SetUniformsMat4f("u_Transform", meshTransform);
     mesh.m_Shader->SetUniformsMat4f("u_ViewProjection", viewProjection);
+    mesh.m_Shader->SetUniforms1i("u_Texture", 0);
 
     mesh.Select();
-
-
 
     GLCall(glDrawElements(GL_TRIANGLES, mesh.m_TriangleCount, GL_UNSIGNED_INT, nullptr));
 }
@@ -72,4 +69,11 @@ void Renderer::DrawMesh(Mesh& mesh, const glm::mat4 meshTransform, const glm::ma
 void Renderer::Clear()
 {
     GLCall(glClear(GL_COLOR_BUFFER_BIT));
+}
+
+void Renderer::Init()
+{
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CCW);
 }

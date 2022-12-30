@@ -1,37 +1,45 @@
 #shader vertex
-#version 330 core
+#version 410 core
 
-layout(location = 0) in vec3 position;
-//layout(location = 2) in vec4 color;
-layout(location = 1) in vec2 a_TexCoord;
+layout(location = 0) in uint data;
 
 uniform mat4 u_Transform;
 uniform mat4 u_ViewProjection;
-//out vec4 v_VertexColor;
-out vec2 v_TexCoord;
-out vec3 v_Position;
+
+out vec4 v_Color;
+out vec3 v_TexCoord;
+
+vec2 texCoords[4] = vec2[4](
+	vec2(0.0f, 0.0f),
+	vec2(1.0f, 0.0f),
+	vec2(1.0f, 1.0f),
+	vec2(0.0f, 1.0f)
+);
 
 void main()
 {
-	//u_VertexColor = color;
-	v_TexCoord = a_TexCoord;
-	gl_Position = u_ViewProjection * u_Transform * vec4(position, 1.0);
-	v_Position = position;
+	float x = data & 0x1F;
+	float y = (data >> 5) & 0x1F;
+	float z = (data >> 10) & 0x1F;
+
+	uint blockType = (data >> 15) & 0xF;
+	uint texIndex = (data >> 19) & 3;
+
+	v_TexCoord = vec3(texCoords[texIndex], blockType);
+
+	gl_Position = u_ViewProjection * u_Transform * vec4(x,y,z, 1.0);
 };
 
 #shader fragment
-#version 330 core
+#version 410 core
 
 out vec4 color;
-//in vec4 v_VertexColor;
-in vec2 v_TexCoord;
-in vec3 v_Position;
 
-uniform vec4 u_Color;
 uniform sampler2DArray u_Texture;
+in vec3 v_TexCoord;
 
 void main()
 {
-	//color = texture(u_Texture, vec3(v_TexCoord.xy, ceil(v_TexCoord.z)), 0);
-	color = vec4(floor(v_Position.z),0,0, 1.0);
-};
+	color = texture(u_Texture, v_TexCoord, 0);
+	//color = vec4(1,0,0, 1);
+}

@@ -34,6 +34,14 @@ public:
 		m_Stride += size;
 	}
 
+	template<>
+	void Push <unsigned int>(unsigned int count)
+	{
+		unsigned int size = count * sizeof(unsigned int);
+		m_Elements.push_back({ GL_INT, count, size });
+		m_Stride += size;
+	}
+
 	inline const std::vector<VertexBufferElement> GetElements() const { return m_Elements; }
 	inline const unsigned int GetStride() const { return m_Stride; }
 };

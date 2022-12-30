@@ -20,8 +20,7 @@ public:
 
     struct Vertex
     {
-        glm::vec3 position = { 0,0,0 };
-        glm::vec2 texCoord = { 0,0};
+        unsigned int data = 0;
     };
 
     Shader* m_Shader;
@@ -45,7 +44,7 @@ private:
 class Renderer
 {
 	public:
-		//static void Init();
         static void DrawMesh(Mesh& mesh, const glm::mat4 meshTransform, const glm::mat4 viewProjection);
+        static void Init();
 		static void Clear();
 };
