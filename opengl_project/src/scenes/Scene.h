@@ -15,14 +15,22 @@ class Scene
 		~Scene() {};
 
 		virtual void OnUpdate();
+
 		virtual void OnImGUIRender() {};
 
-		void AddEntity(Entity* entiry);
+		//template<class EntityClass>
+		//void CreateNewEntities();
+		//std::vector <std::function<Entity* ()>> m_EntitiesToAdd;
+
+		void AddEntity(Entity* entity);
+		void OnNewEntities();
 
 		Camera m_MainCamera;
 
 private:
 	std::vector<Entity*> m_Entities;
+	std::vector<Entity*> m_EntitiesToStart;
+	bool m_NewEntitiesToStart;
 };
 
 #else

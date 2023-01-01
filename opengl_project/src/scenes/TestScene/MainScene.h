@@ -3,7 +3,7 @@
 #include "Scene.h"
 
 //Game Objects
-#include "Chunck.h"
+#include "ChunckManager.h"
 #include "CameraController.h"
 
 class MainScene : public Scene
@@ -12,10 +12,10 @@ public:
 
 	MainScene()
 	{	
-		Chunck* chunck = new Chunck();
+		ChunckManager* chunckManager = ChunckManager::instance();
 		CameraController* camera = new CameraController();
 
-		AddEntity(chunck);
 		AddEntity(camera);
+		AddEntity(chunckManager);
 	};
 };

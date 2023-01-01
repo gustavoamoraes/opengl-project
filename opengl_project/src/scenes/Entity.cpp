@@ -4,6 +4,6 @@ void Entity::Update()
 {
 }
 
-void Entity::Setup()
+void Entity::Start()
 {
 }

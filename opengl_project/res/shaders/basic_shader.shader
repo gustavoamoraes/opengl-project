@@ -33,13 +33,13 @@ void main()
 #shader fragment
 #version 410 core
 
-out vec4 color;
-
 uniform sampler2DArray u_Texture;
+
+out vec4 color;
 in vec3 v_TexCoord;
 
 void main()
 {
 	color = texture(u_Texture, v_TexCoord, 0);
-	//color = vec4(1,0,0, 1);
+	//color = vec4(vec3(gl_FragCoord.z), 1);
 }

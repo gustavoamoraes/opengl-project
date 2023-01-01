@@ -1,10 +1,17 @@
 #include "CameraController.h"
+#include "ChunckManager.h"
 #include "Input.h"
 
 #include <GLFW/glfw3.h>
 
-CameraController::CameraController() : m_LastMousePosition(0.0f)
+CameraController::CameraController() 
 {
+	m_LastMousePosition = glm::vec2(0.0f);
+}
+
+void CameraController::Start()
+{
+	m_MyScene->m_MainCamera.SetBackgroundColor({ 34, 128, 161 });
 }
 
 CameraController::~CameraController()

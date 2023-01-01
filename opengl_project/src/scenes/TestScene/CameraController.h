@@ -9,6 +9,8 @@ class CameraController : public Entity
 		~CameraController();
 
 		void Update() override;
+		void Start() override;
+
 	private:
 		glm::vec2 m_LastMousePosition;
 

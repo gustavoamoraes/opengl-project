@@ -21,12 +21,11 @@ class Application
 		void OnWindowClosed();
 
 		Window& GetWindow();
-
+		Scene* m_CurrentScene = nullptr;
 	private:
 		static Application* s_Instance;
 		std::unique_ptr<Window> m_Window;
 		std::unique_ptr<Gui> m_Gui;
-		Scene* m_CurrentScene = nullptr;
 
 		bool m_Running = true;
 };

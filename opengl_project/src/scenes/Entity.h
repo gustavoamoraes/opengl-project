@@ -8,7 +8,7 @@ class Entity
 {
 public:
 	virtual void Update();
-	virtual void Setup();
+	virtual void Start();
 
 	bool m_Active = true;
 	Scene* m_MyScene;

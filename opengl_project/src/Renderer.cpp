@@ -19,7 +19,6 @@ Mesh::Mesh() : m_TriangleCount(0), m_VerticeCount(0)
     m_VertexBuffer = new VertexBuffer();
 
     m_Layout.Push<unsigned int>(1);
-    //m_Layout.Push<int>(1);
 
     m_VertexArray->AddBuffer(m_Layout, *m_VertexBuffer);
 }
@@ -68,7 +67,7 @@ void Renderer::DrawMesh(Mesh& mesh, const glm::mat4 meshTransform, const glm::ma
 
 void Renderer::Clear()
 {
-    GLCall(glClear(GL_COLOR_BUFFER_BIT));
+    GLCall(glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT));
 }
 
 void Renderer::Init()
@@ -76,4 +75,5 @@ void Renderer::Init()
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CCW);
+    glEnable(GL_DEPTH_TEST);
 }

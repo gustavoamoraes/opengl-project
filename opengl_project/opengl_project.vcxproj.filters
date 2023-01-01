@@ -1348,7 +1348,13 @@
     <ClInclude Include="src\scenes\TestScene\CameraController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Texture.h">
+    <ClInclude Include="src\TextureAtlas.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\TestScene\ChunckManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\scenes\TestScene\Noise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -1422,7 +1428,10 @@
     <ClCompile Include="src\scenes\TestScene\CameraController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SRC\Texture.cpp">
+    <ClCompile Include="SRC\TextureAtlas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scenes\TestScene\ChunckManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,21 +1,32 @@
-#pragma once
+#ifndef CHUNCK_H
+#define CHUNCK_H
 
 #include "Entity.h"
 #include "Renderer.h"
 #include "Shader.h"
 #include "Transform.h"
 #include "VertexArray.h"
-#include "Texture.h"
+#include "TextureAtlas.h"
+#include "ChunckManager.h"
 
 class Chunck : public Entity
 {
 public:
-	Chunck();
+	Chunck(glm::vec3 chunckWorldCoord);
 	~Chunck();
 
 	void Update() override;
+	void Start() override;
+
+	void UpdateChunck();
+
+	ChunckManager::Block GetBlock(glm::uvec3 localIndex);
 
 private:
+
+	void CreateChunckMesh();
+	void AddVoxelFaces(glm::vec3 voxelIndex);
+	void GenerateChunckVoxels();
 
 	const int m_FaceTriangulation[6]{ 3,1,0,3,2,1 };
 
@@ -31,22 +42,33 @@ private:
 
 	const glm::vec3 m_CubeVertices[8]
 	{
-		glm::vec3(0.0f, 1.0f, 0.0f),
-		glm::vec3(1.0f, 1.0f, 0.0f),
-		glm::vec3(1.0f, 1.0f, 1.0f),
-		glm::vec3(0.0f, 1.0f, 1.0f),
+		glm::vec3(0, 1, 0),
+		glm::vec3(1, 1, 0),
+		glm::vec3(1, 1, 1),
+		glm::vec3(0, 1, 1),
 
-		glm::vec3(0.0f, 0.0f, 0.0f),
-		glm::vec3(1.0f, 0.0f, 0.0f),
-		glm::vec3(1.0f, 0.0f, 1.0f),
-		glm::vec3(0.0f, 0.0f, 1.0f),
+		glm::vec3(0, 0, 0),
+		glm::vec3(1, 0, 0),
+		glm::vec3(1, 0, 1),
+		glm::vec3(0, 0, 1),
 	};
 
-	const int m_PlaneWidthUnits = 1;
-	const int m_PlaneDepthUnits = 1;
-	float m_Angle = 0;
-	TextureArray* m_TextureTest;
-	Transform m_PlayerTransform;
-	Transform m_TestTransform;
-	Mesh m_Cube;
+
+	ChunckManager::Block m_Blocks [ChunckManager::m_ChunckSize][ChunckManager::m_ChunckSize][ChunckManager::m_ChunckSize];
+
+	ChunckManager* m_ChunckManager;
+
+	glm::vec2 m_WorldChunckCoord;
+	glm::vec2 m_GlobalChunckCoord = glm::vec2(0,0);
+
+	std::vector<unsigned int> m_Triangles;
+	std::vector<Mesh::Vertex> m_Vertices;
+
+	Transform m_ChunckTransform;
+	TextureAtlas* m_TextureTest;
+	Mesh m_ChunckMesh;
 };
+
+#else
+class Chunck;
+#endif

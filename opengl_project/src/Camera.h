@@ -28,6 +28,6 @@ public:
 private:
 	float m_Fovy = 45.0f;
 	float m_Far = 300.0f;
-	float m_Near = 0.0f;
+	float m_Near = 0.1f;
 	float m_Aspect = 4.0f / 3.0f;
 };
