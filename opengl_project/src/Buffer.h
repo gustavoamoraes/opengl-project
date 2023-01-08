@@ -70,6 +70,4 @@ class IndexBuffer
 		void SetData(const unsigned int* data, unsigned int count);
 		void Bind() const;
 		void Unbind() const;
-
-		unsigned int m_IndexCount;
 };

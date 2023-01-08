@@ -16,9 +16,9 @@ public:
 		return &INSTANCE;
 	}
 
-	static const size_t m_ChunckSize = 16;
+	static const size_t m_ChunckSize = 31;
 
-	Block getBlockGlobal(glm::uvec3 globalVoxelIndex);
+	Block getBlockGlobal(glm::vec3 globalVoxelIndex);
 
 	void GenerateChuncks();
 
@@ -30,10 +30,13 @@ private:
 
 	const unsigned char m_ChunckRadius = 4;
 
-	static const size_t m_ChuncksWidth = 1;
-	static const size_t m_ChuncksHeight = 1;
+	static const size_t m_ChuncksWidth = 4;
+	static const size_t m_ChuncksHeight = 4;
+	static const unsigned int m_MaxVoxelsPerChunck = (m_ChunckSize * m_ChunckSize * m_ChunckSize * 1/2) - (m_ChunckSize%2 == 0);
 
 	Chunck* m_Chuncks[m_ChuncksWidth][m_ChuncksHeight];
+
+friend Chunck;
 };
 
 #else

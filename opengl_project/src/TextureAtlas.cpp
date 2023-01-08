@@ -86,7 +86,7 @@ void TextureAtlas::SetData(stbi_uc* data)
 
 void TextureAtlas::Create()
 {
-	glTexStorage3D(GL_TEXTURE_2D_ARRAY, 1, m_InternalFormat, m_TileWidth, m_TileHeight, m_TileCount);
+	glTexStorage3D(GL_TEXTURE_2D_ARRAY, 1, m_InternalFormat, m_TileWidth, m_TileHeight, m_TileCount+1);
 
 	//Set texture parameters
 	glTextureParameteri(m_RendererID, GL_TEXTURE_MIN_FILTER, GL_NEAREST);

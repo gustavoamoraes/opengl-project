@@ -25,8 +25,10 @@ Mesh::Mesh() : m_TriangleCount(0), m_VerticeCount(0)
 
 void Mesh::SetTriangles (const unsigned int* triangles, unsigned int count)
 {
-    m_IndexBuffer->SetData(triangles, count);
+    //Select();
+
     m_VertexArray->SetIndexBuffer(*m_IndexBuffer);
+    m_IndexBuffer->SetData(triangles, count);
     m_TriangleCount = count;
 }
 
@@ -39,6 +41,8 @@ void Mesh::SetVertices(Vertex* vertices, unsigned int count)
 void Mesh::Select()
 {
     m_VertexArray->Bind();
+    m_VertexBuffer->Bind();
+    m_IndexBuffer->Bind();
 }
 
 bool GLLogCall(const char* function, int line, const char* file)
@@ -55,12 +59,12 @@ bool GLLogCall(const char* function, int line, const char* file)
 
 void Renderer::DrawMesh(Mesh& mesh, const glm::mat4 meshTransform, const glm::mat4 viewProjection)
 {
+    mesh.Select();
+
     mesh.m_Shader->Bind();
     mesh.m_Shader->SetUniformsMat4f("u_Transform", meshTransform);
     mesh.m_Shader->SetUniformsMat4f("u_ViewProjection", viewProjection);
     mesh.m_Shader->SetUniforms1i("u_Texture", 0);
-
-    mesh.Select();
 
     GLCall(glDrawElements(GL_TRIANGLES, mesh.m_TriangleCount, GL_UNSIGNED_INT, nullptr));
 }

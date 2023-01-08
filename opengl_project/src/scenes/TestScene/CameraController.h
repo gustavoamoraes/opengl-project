@@ -17,5 +17,5 @@ class CameraController : public Entity
 		float m_Yaw = 0;
 		float m_Pitch = 0;
 		const float m_Sensitivity = 0.001f;
-		const float m_Velocity = 0.05f;
+		const float m_Velocity = 0.25f;
 };
