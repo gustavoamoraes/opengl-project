@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Scene.h"
+#include "BlockAtlas.h"
 
 //Game Objects
 #include "ChunckManager.h"
@@ -12,10 +12,17 @@ public:
 
 	MainScene()
 	{	
+		Setup(); 
+	};
+
+	void Setup()
+	{
+		BlockAtlas::instance()->GenerateBlockAtlas();
+
 		ChunckManager* chunckManager = ChunckManager::instance();
 		CameraController* camera = new CameraController();
 
-		AddEntity(camera);
 		AddEntity(chunckManager);
-	};
+		AddEntity(camera);
+	}
 };

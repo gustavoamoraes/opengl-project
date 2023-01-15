@@ -18,12 +18,12 @@ vec2 texCoords[4] = vec2[4](
 
 void main()
 {
-	float x = data & 0x1F;
-	float y = (data >> 5) & 0x1F;
-	float z = (data >> 10) & 0x1F;
+	float x = data & 0x1F;//change ox1f
+	float y = (data >> 5) & 0x7F;
+	float z = (data >> 12) & 0x1F;
 
-	uint blockType = (data >> 15) & 0xF;
-	uint texIndex = (data >> 19) & 3;
+	uint blockType = (data >> 17) & 0xF;
+	uint texIndex = (data >> 21) & 3;
 
 	v_TexCoord = vec3(texCoords[texIndex], blockType);
 

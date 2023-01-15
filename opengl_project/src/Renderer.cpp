@@ -23,6 +23,10 @@ Mesh::Mesh() : m_TriangleCount(0), m_VerticeCount(0)
     m_VertexArray->AddBuffer(m_Layout, *m_VertexBuffer);
 }
 
+Mesh::~Mesh()
+{
+}
+
 void Mesh::SetTriangles (const unsigned int* triangles, unsigned int count)
 {
     //Select();

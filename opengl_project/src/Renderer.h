@@ -28,6 +28,7 @@ public:
     uint32_t m_VerticeCount;
 
     Mesh();
+    ~Mesh();
 
     void SetTriangles(const unsigned int* triangles, unsigned int count);
     void SetVertices(Vertex* vertices, unsigned int count);

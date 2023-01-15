@@ -3,26 +3,27 @@
 #include "ChunckManager.h"
 #include "Chunck.h"
 #include "Application.h"
+#include "TerrainGenerator.h"
 
 void ChunckManager::Start()
 {
 	GenerateChuncks();
 }
 
-ChunckManager::Block ChunckManager::getBlockGlobal(glm::vec3 globalVoxelIndex)
+ChunckManager::BlockIndex ChunckManager::getBlockGlobal(glm::vec3 globalVoxelIndex)
 {
-	if (globalVoxelIndex.x < 0 || globalVoxelIndex.y < 0 || globalVoxelIndex.z < 0 || globalVoxelIndex.y >= m_ChunckSize)
+	if (globalVoxelIndex.x < 0 || globalVoxelIndex.y < 0 || globalVoxelIndex.z < 0 || globalVoxelIndex.y >= m_ChunckSize.y)
 		return 0;
 
-	glm::uvec2 chunckIndex = glm::vec2(floor(globalVoxelIndex.x / m_ChunckSize), floor(globalVoxelIndex.z / m_ChunckSize));
+	glm::uvec2 chunckIndex = glm::vec2(floor(globalVoxelIndex.x / m_ChunckSize.x), floor(globalVoxelIndex.z / m_ChunckSize.z));
 
 	if (chunckIndex.x >= m_ChuncksWidth || chunckIndex.y >= m_ChuncksHeight)
 		return 0;
 
-	glm::vec3 localVoxelCoord = glm::vec3(globalVoxelIndex.x - (chunckIndex.x * m_ChunckSize),
+	glm::vec3 localVoxelCoord = glm::vec3(
+		globalVoxelIndex.x - (chunckIndex.x * m_ChunckSize.x),
 		globalVoxelIndex.y,
-		globalVoxelIndex.z - (chunckIndex.y * m_ChunckSize));
-
+		globalVoxelIndex.z - (chunckIndex.y * m_ChunckSize.z));
 
 	return m_Chuncks[chunckIndex.x][chunckIndex.y]->GetBlock(localVoxelCoord);
 }
@@ -36,7 +37,7 @@ void ChunckManager::GenerateChuncks()
 			Chunck* newChunck = new Chunck(glm::vec2(x, y));
 			m_MyScene->AddEntity(newChunck);
 			m_Chuncks[x][y] = newChunck;
-			newChunck->GenerateChunckVoxels();
+			m_TerrainGenerator->GenerateVoxelsForChunck(newChunck);
 		}
 	}
 	
@@ -49,8 +50,12 @@ void ChunckManager::GenerateChuncks()
 	}
 }
 
-ChunckManager::ChunckManager()
+ChunckManager::ChunckManager() 
 {
+	//srand((unsigned)time(NULL));
+	//unsigned int seed = rand()&UINT32_MAX;
+	//std::cout << seed;
+	m_TerrainGenerator = new TerrainGenerator(23681u);
 }
 
 ChunckManager::~ChunckManager()

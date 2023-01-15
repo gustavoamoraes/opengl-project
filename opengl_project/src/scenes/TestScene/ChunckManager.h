@@ -2,13 +2,16 @@
 #define CHUNCK_MANAGER_H
 
 #include "Entity.h"
+#include "CameraController.h"
 
 class Chunck;
+class ChunckMesh;
+class TerrainGenerator;
 
 class ChunckManager : public Entity
 {
 public:
-	typedef unsigned char Block;
+	typedef unsigned char BlockIndex;
 
 	static ChunckManager* instance()
 	{
@@ -16,27 +19,25 @@ public:
 		return &INSTANCE;
 	}
 
-	static const size_t m_ChunckSize = 31;
+	static constexpr glm::uvec3 m_ChunckSize { 31,127,31 };
 
-	Block getBlockGlobal(glm::vec3 globalVoxelIndex);
+	//Number of voxels that give the max area possible. Number of voxel that dont have neighbors except in the diagonals. *approximately* 
+	static const unsigned int m_MaxExposedVoxels = (m_ChunckSize.x * m_ChunckSize.y * m_ChunckSize.z * 1/2);
 
+	BlockIndex getBlockGlobal(glm::vec3 globalVoxelIndex);
 	void GenerateChuncks();
-
 	void Start() override;
 
 private:
 	ChunckManager();
 	~ChunckManager();
 
-	const unsigned char m_ChunckRadius = 4;
+	TerrainGenerator* m_TerrainGenerator;
 
 	static const size_t m_ChuncksWidth = 4;
 	static const size_t m_ChuncksHeight = 4;
-	static const unsigned int m_MaxVoxelsPerChunck = (m_ChunckSize * m_ChunckSize * m_ChunckSize * 1/2) - (m_ChunckSize%2 == 0);
 
 	Chunck* m_Chuncks[m_ChuncksWidth][m_ChuncksHeight];
-
-friend Chunck;
 };
 
 #else

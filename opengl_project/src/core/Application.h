@@ -5,7 +5,7 @@
 
 #include "Window.h"
 #include "Gui.h"
-#include "scenes/Scene.h"
+#include "Scene.h"
 
 //#include "Event.h"
 
