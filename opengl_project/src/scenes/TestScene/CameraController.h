@@ -2,6 +2,8 @@
 
 #include "Entity.h"
 
+class ChunckManager;
+
 class CameraController : public Entity
 {
 	public:
@@ -13,6 +15,7 @@ class CameraController : public Entity
 
 	private:
 		glm::vec2 m_LastMousePosition;
+		ChunckManager* m_ChunckManager1;
 
 		float m_Yaw = 0;
 		float m_Pitch = 0;

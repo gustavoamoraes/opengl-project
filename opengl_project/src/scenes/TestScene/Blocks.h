@@ -12,12 +12,14 @@ struct Block
 class Blocks
 {
 public:
-	const static int m_NumberOfBlocks = 3;
+	const static int m_NumberOfBlocks = 5;
 	static const Block* m_AllBlocks[m_NumberOfBlocks];
 
 	static const Block AIR;
 	static const Block GRASS;
 	static const Block DIRT;
+	static const Block STONE;
+	static const Block ICE;
 
 	static const Block AddBlock(const Block* memberPointer, const Block newBlock)
 	{

@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "ChunckMesh.h"
 #include "ChunckManager.h"
 #include "Chunck.h"
@@ -14,10 +16,15 @@ ChunckMesh::~ChunckMesh()
 
 void ChunckMesh::UpdateChunckMesh()
 {
-	m_Triangles = (unsigned int*) malloc(ChunckManager::m_MaxExposedVoxels * 6 * 6 * sizeof(unsigned int));
-	m_Vertices = (Mesh::Vertex*) malloc(ChunckManager::m_MaxExposedVoxels * 4 * 6 * sizeof(Mesh::Vertex));
+	m_MeshApplied = false;
+
+	m_Triangles = (unsigned int*)malloc(ChunckManager::m_MaxExposedVoxels * 6 * 6 * sizeof(unsigned int));
+	m_Vertices = (Mesh::Vertex*)malloc(ChunckManager::m_MaxExposedVoxels * 4 * 6 * sizeof(Mesh::Vertex));
 
 	auto chunckSize = ChunckManager::m_ChunckSize;
+
+	m_VerticeCount = 0;
+	m_TriangleCount = 0;
 
 	for (size_t x = 0; x < chunckSize.x; x++)
 	{
@@ -29,20 +36,24 @@ void ChunckMesh::UpdateChunckMesh()
 			}
 		}
 	}
+}
 
+void ChunckMesh::ApplyMesh()
+{
 	m_Mesh.SetTriangles(m_Triangles, m_TriangleCount);
 	m_Mesh.SetVertices(m_Vertices, m_VerticeCount);
 
 	free(m_Triangles);
 	free(m_Vertices);
+
+	m_MeshApplied = true;
 }
 
 void ChunckMesh::AddVoxelFaces(glm::vec3 localVoxelIndex)
 {
 	ChunckManager::BlockIndex currentBlock = m_MyChunck->GetBlock(localVoxelIndex);
 
-	//Return if its air
-	if (!currentBlock)
+	if (currentBlock == Blocks::AIR.id)
 		return;
 
 	auto chunckSize = ChunckManager::m_ChunckSize;

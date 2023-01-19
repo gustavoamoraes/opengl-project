@@ -11,7 +11,7 @@ public:
 		return &INSTANCE;
 	}
 
-	const int m_SpriteSize = 32;
+	const int m_SpriteSize = 16;
 
 	static const std::map<std::string, std::string> m_BlocksPaths;
 

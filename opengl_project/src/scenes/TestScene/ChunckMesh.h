@@ -17,7 +17,11 @@ public:
 
 	Mesh m_Mesh;
 	const Chunck* m_MyChunck;
+
 	void UpdateChunckMesh();
+	void ApplyMesh();
+
+	bool m_MeshApplied;
 
 	ChunckMesh(Chunck* myChunck);
 	~ChunckMesh();

@@ -25,6 +25,8 @@ public:
 	void UpdateChunck();
 
 	ChunckManager::BlockIndex GetBlock(glm::uvec3 localIndex) const;
+	ChunckMesh m_ChunckMesh;
+	bool m_MeshUpdateReady = false;
 
 private:
 	ChunckManager::BlockIndex m_Blocks 
@@ -33,7 +35,6 @@ private:
 		[ChunckManager::m_ChunckSize.z];
 
 	ChunckManager* m_ChunckManager;
-	ChunckMesh m_ChunckMesh;
 
 	glm::vec2 m_WorldChunckCoord;
 	Transform m_ChunckTransform;

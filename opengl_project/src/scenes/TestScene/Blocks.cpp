@@ -21,6 +21,7 @@ const Block Blocks::GRASS = AddBlock
 		}
 	}
 );
+
 const Block Blocks::DIRT = AddBlock
 (
 	&Blocks::DIRT,
@@ -34,6 +35,40 @@ const Block Blocks::DIRT = AddBlock
 			{ChunckMesh::CubeSide::Back, BlockAtlas::instance()->GetID("dirt")},
 			{ChunckMesh::CubeSide::Right, BlockAtlas::instance()->GetID("dirt")},
 			{ChunckMesh::CubeSide::Left, BlockAtlas::instance()->GetID("dirt")},
+		}
+	}
+);
+
+const Block Blocks::STONE = AddBlock
+(
+	&Blocks::STONE,
+	{
+		3,
+		"stone",
+		{
+			{ChunckMesh::CubeSide::Top, BlockAtlas::instance()->GetID("stone")},
+			{ChunckMesh::CubeSide::Bottom, BlockAtlas::instance()->GetID("stone")},
+			{ChunckMesh::CubeSide::Front, BlockAtlas::instance()->GetID("stone")},
+			{ChunckMesh::CubeSide::Back, BlockAtlas::instance()->GetID("stone")},
+			{ChunckMesh::CubeSide::Right, BlockAtlas::instance()->GetID("stone")},
+			{ChunckMesh::CubeSide::Left, BlockAtlas::instance()->GetID("stone")},
+		}
+	}
+);
+
+const Block Blocks::ICE = AddBlock
+(
+	&Blocks::ICE,
+	{
+		4,
+		"ice",
+		{
+			{ChunckMesh::CubeSide::Top, BlockAtlas::instance()->GetID("ice")},
+			{ChunckMesh::CubeSide::Bottom, BlockAtlas::instance()->GetID("ice")},
+			{ChunckMesh::CubeSide::Front, BlockAtlas::instance()->GetID("ice")},
+			{ChunckMesh::CubeSide::Back, BlockAtlas::instance()->GetID("ice")},
+			{ChunckMesh::CubeSide::Right, BlockAtlas::instance()->GetID("ice")},
+			{ChunckMesh::CubeSide::Left, BlockAtlas::instance()->GetID("ice")},
 		}
 	}
 );

@@ -2,10 +2,9 @@
 #define CHUNCK_MANAGER_H
 
 #include "Entity.h"
-#include "CameraController.h"
 
 class Chunck;
-class ChunckMesh;
+class CameraController;
 class TerrainGenerator;
 
 class ChunckManager : public Entity
@@ -25,6 +24,7 @@ public:
 	static const unsigned int m_MaxExposedVoxels = (m_ChunckSize.x * m_ChunckSize.y * m_ChunckSize.z * 1/2);
 
 	BlockIndex getBlockGlobal(glm::vec3 globalVoxelIndex);
+
 	void GenerateChuncks();
 	void Start() override;
 
@@ -34,10 +34,12 @@ private:
 
 	TerrainGenerator* m_TerrainGenerator;
 
-	static const size_t m_ChuncksWidth = 4;
-	static const size_t m_ChuncksHeight = 4;
+	static const size_t m_ChuncksWidth = 7;
+	static const size_t m_ChuncksHeight = 7;
 
 	Chunck* m_Chuncks[m_ChuncksWidth][m_ChuncksHeight];
+
+friend CameraController;
 };
 
 #else

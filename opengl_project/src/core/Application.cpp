@@ -17,7 +17,7 @@ Application::Application(const std::string& name)
 {
 	s_Instance = this;
 
-	m_Window = std::unique_ptr<Window>(new Window((std::string)name,800, 600));
+	m_Window = std::unique_ptr<Window>(new Window((std::string)name,800, 800));
 	m_Gui = std::unique_ptr<Gui>(new Gui());
 	m_CurrentScene = new MainScene();
 }
@@ -38,9 +38,9 @@ void Application::Run()
 		m_CurrentScene->OnNewEntities();
 		m_CurrentScene->OnUpdate();
 
-		m_Gui->Begin();
-		m_CurrentScene->OnImGUIRender();
-		m_Gui->End();
+		//m_Gui->Begin();
+		//m_CurrentScene->OnImGUIRender();
+		//m_Gui->End();
 
 		m_Window->OnUpdate();
 	}

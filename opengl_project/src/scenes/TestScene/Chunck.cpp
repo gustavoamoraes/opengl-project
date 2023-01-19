@@ -21,18 +21,27 @@ Chunck::Chunck(glm::vec2 chunckWorldCoord) : m_WorldChunckCoord(chunckWorldCoord
 
 void Chunck::Update()
 {
-	Renderer::DrawMesh(m_ChunckMesh.m_Mesh, m_ChunckTransform.GetMatrix(), m_MyScene->m_MainCamera.getViewProjectionMatrix());
+	if (!m_ChunckMesh.m_MeshApplied && m_MeshUpdateReady)
+	{
+		m_ChunckMesh.ApplyMesh();
+		m_MeshUpdateReady = false;
+	}
+
+	Renderer::DrawMesh( m_ChunckMesh.m_Mesh, m_ChunckTransform.GetMatrix(), m_MyScene->m_MainCamera.getViewProjectionMatrix());
 }
 
 void Chunck::Start()
 {
+	m_ChunckTransform.m_Position = glm::vec3(m_WorldChunckCoord.x * ChunckManager::m_ChunckSize.x, 0, m_WorldChunckCoord.y * ChunckManager::m_ChunckSize.z);
 }
 
 void Chunck::UpdateChunck() 
 {
-	m_ChunckTransform.m_Position = glm::vec3(m_WorldChunckCoord.x * ChunckManager::m_ChunckSize.x, 0, m_WorldChunckCoord.y * ChunckManager::m_ChunckSize.z);
+	m_MeshUpdateReady = false;
 
 	m_ChunckMesh.UpdateChunckMesh();
+
+	m_MeshUpdateReady = true;
 }
 
 ChunckManager::BlockIndex Chunck::GetBlock(glm::uvec3 localIndex) const

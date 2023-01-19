@@ -4,7 +4,9 @@ const std::map<std::string, std::string> BlockAtlas::m_BlocksPaths
 {
 	{ "grass_top", "res/textures/blocks/grass_top.png" },
 	{ "grass_side", "res/textures/blocks/grass_side.png" },
-	{ "dirt", "res/textures/blocks/dirt.png" }
+	{ "stone", "res/textures/blocks/stone.png" },
+	{ "dirt", "res/textures/blocks/dirt.png" },
+	{ "ice", "res/textures/blocks/ice.png" },
 };
 
 void BlockAtlas::GenerateBlockAtlas()

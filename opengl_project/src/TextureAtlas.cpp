@@ -53,8 +53,8 @@ stbi_uc* TextureAtlas::Load(std::string path)
 
 	stbi_uc* data = stbi_load(path.c_str(), &width, &height, &channels, 0);
 
-	if (height != m_TileHeight || width != m_TileWidth || channels != 4)
-		return nullptr;
+	//if (height != m_TileHeight || width != m_TileWidth || channels != 4)
+	//	return nullptr;
 
 	return data;
 }

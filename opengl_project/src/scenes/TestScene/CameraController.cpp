@@ -1,5 +1,9 @@
+#include <iostream>
+#include <thread>
+
 #include "CameraController.h"
 #include "Input.h"
+#include "Chunck.h"
 
 #include <GLFW/glfw3.h>
 
@@ -11,6 +15,8 @@ CameraController::CameraController()
 void CameraController::Start()
 {
 	m_MyScene->m_MainCamera.SetBackgroundColor({ 34, 128, 161 });
+
+	m_ChunckManager1 = ChunckManager::instance();
 }
 
 CameraController::~CameraController()
@@ -22,6 +28,9 @@ void CameraController::Update()
 	glm::vec3 input(Input::GetKey(GLFW_KEY_D) - Input::GetKey(GLFW_KEY_A),
 		Input::GetKey(GLFW_KEY_Q) - Input::GetKey(GLFW_KEY_E),
 		Input::GetKey(GLFW_KEY_S) - Input::GetKey(GLFW_KEY_W));
+
+	if (Input::GetKey(GLFW_KEY_P) && m_ChunckManager1->m_Chuncks[0][0]->m_ChunckMesh.m_MeshApplied)
+		std::thread (&Chunck::UpdateChunck, m_ChunckManager1->m_Chuncks[0][0]).detach();
 
 	glm::vec2 mousePosNow = Input::GetMousePosition();
 	glm::vec2 mousePosDifference = m_LastMousePosition - mousePosNow;
