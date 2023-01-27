@@ -5,7 +5,7 @@
 #include "Chunck.h"
 #include "Blocks.h"
 
-ChunckMesh::ChunckMesh(Chunck* myChunck) : m_MyChunck(myChunck)
+ChunckMesh::ChunckMesh(Chunck* myChunck) : m_MyChunck(myChunck), m_Triangles(nullptr), m_Vertices(nullptr)
 {
 	m_ChunckManager = ChunckManager::instance();
 }
@@ -21,6 +21,9 @@ void ChunckMesh::UpdateChunckMesh()
 	m_Triangles = (unsigned int*)malloc(ChunckManager::m_MaxExposedVoxels * 6 * 6 * sizeof(unsigned int));
 	m_Vertices = (Mesh::Vertex*)malloc(ChunckManager::m_MaxExposedVoxels * 4 * 6 * sizeof(Mesh::Vertex));
 
+	if (!m_Triangles || !m_Vertices)
+		return;
+
 	auto chunckSize = ChunckManager::m_ChunckSize;
 
 	m_VerticeCount = 0;
@@ -30,16 +33,19 @@ void ChunckMesh::UpdateChunckMesh()
 	{
 		for (size_t y = 0; y < chunckSize.y; y++)
 		{
-			for (size_t z = 0; z < chunckSize.z; z++)
+			for (size_t z =0; z < chunckSize.z; z++)
 			{
 				AddVoxelFaces(glm::vec3(x, y, z));
 			}
-		}
+		}	
 	}
-}
+}	
 
 void ChunckMesh::ApplyMesh()
 {
+	if (!m_Triangles || !m_Vertices)
+		return;
+
 	m_Mesh.SetTriangles(m_Triangles, m_TriangleCount);
 	m_Mesh.SetVertices(m_Vertices, m_VerticeCount);
 
@@ -60,19 +66,19 @@ void ChunckMesh::AddVoxelFaces(glm::vec3 localVoxelIndex)
 
 	glm::vec3 globalVoxelIndex = glm::vec3
 	(
-		m_MyChunck->m_WorldChunckCoord.x * chunckSize.x + localVoxelIndex.x,
+		m_MyChunck->m_GlobalChunckIndex.x * chunckSize.x + localVoxelIndex.x,
 		localVoxelIndex.y,
-		m_MyChunck->m_WorldChunckCoord.y * chunckSize.z + localVoxelIndex.z
+		m_MyChunck->m_GlobalChunckIndex.y * chunckSize.z + localVoxelIndex.z
 	);
 
-	bool visibleSides[6] { false, false, false, false, false, false };
+	bool visibleSides[6] { 0, 0, 0, 0, 0, 0 };
 
-	visibleSides[(int)CubeSide::Top] = !m_ChunckManager->getBlockGlobal(globalVoxelIndex + Transform::up);
-	visibleSides[(int)CubeSide::Bottom] = !m_ChunckManager->getBlockGlobal(globalVoxelIndex - Transform::up);
-	visibleSides[(int)CubeSide::Front] = !m_ChunckManager->getBlockGlobal(globalVoxelIndex + Transform::forward);
-	visibleSides[(int)CubeSide::Back] = !m_ChunckManager->getBlockGlobal(globalVoxelIndex - Transform::forward);
-	visibleSides[(int)CubeSide::Right] = !m_ChunckManager->getBlockGlobal(globalVoxelIndex + Transform::right);
-	visibleSides[(int)CubeSide::Left] = !m_ChunckManager->getBlockGlobal(globalVoxelIndex - Transform::right);
+	visibleSides[(int)CubeSide::Top] = !m_MyChunck->GetBlock2(localVoxelIndex + Transform::up);
+	visibleSides[(int)CubeSide::Bottom] = !m_MyChunck->GetBlock2(localVoxelIndex - Transform::up);
+	visibleSides[(int)CubeSide::Front] = !m_MyChunck->GetBlock2(localVoxelIndex + Transform::forward);
+	visibleSides[(int)CubeSide::Back] = !m_MyChunck->GetBlock2(localVoxelIndex - Transform::forward);
+	visibleSides[(int)CubeSide::Right] = !m_MyChunck->GetBlock2(localVoxelIndex + Transform::right);
+	visibleSides[(int)CubeSide::Left] = !m_MyChunck->GetBlock2(localVoxelIndex - Transform::right);
 
 	for (size_t i = 0; i < 6; i++)
 	{

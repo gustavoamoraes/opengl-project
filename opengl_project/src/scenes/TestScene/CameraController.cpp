@@ -16,7 +16,9 @@ void CameraController::Start()
 {
 	m_MyScene->m_MainCamera.SetBackgroundColor({ 34, 128, 161 });
 
-	m_ChunckManager1 = ChunckManager::instance();
+	m_ChunckManager = ChunckManager::instance();
+
+	m_MyScene->m_MainCamera.m_Transform.m_Position = glm::vec3(0, 128, 0);
 }
 
 CameraController::~CameraController()
@@ -28,9 +30,6 @@ void CameraController::Update()
 	glm::vec3 input(Input::GetKey(GLFW_KEY_D) - Input::GetKey(GLFW_KEY_A),
 		Input::GetKey(GLFW_KEY_Q) - Input::GetKey(GLFW_KEY_E),
 		Input::GetKey(GLFW_KEY_S) - Input::GetKey(GLFW_KEY_W));
-
-	if (Input::GetKey(GLFW_KEY_P) && m_ChunckManager1->m_Chuncks[0][0]->m_ChunckMesh.m_MeshApplied)
-		std::thread (&Chunck::UpdateChunck, m_ChunckManager1->m_Chuncks[0][0]).detach();
 
 	glm::vec2 mousePosNow = Input::GetMousePosition();
 	glm::vec2 mousePosDifference = m_LastMousePosition - mousePosNow;
@@ -49,6 +48,16 @@ void CameraController::Update()
 
 	cameraTransform->m_Position += m_Velocity * (forward * input.z + right * input.x);
 	cameraTransform->m_Rotation = rotationMat;
+
+	glm::vec2 chunckCoord = {floor(cameraTransform->m_Position.x / m_ChunckManager->m_ChunckSize.x),
+		floor(cameraTransform->m_Position.z / m_ChunckManager->m_ChunckSize.z) };
+
+	if (chunckCoord != m_LastChunckCoord)
+	{ 	  
+		m_ChunckManager->SetTarget({ cameraTransform->m_Position.x, cameraTransform->m_Position.z });
+		m_ChunckManager->GenerateChuncks();
+		m_LastChunckCoord = chunckCoord;
+	}
 
 	m_LastMousePosition = mousePosNow;
 }

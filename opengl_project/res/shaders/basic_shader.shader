@@ -18,7 +18,7 @@ vec2 texCoords[4] = vec2[4](
 
 void main()
 {
-	float x = data & 0x1F;//change ox1f
+	float x = data & 0x1F;
 	float y = (data >> 5) & 0x7F;
 	float z = (data >> 12) & 0x1F;
 

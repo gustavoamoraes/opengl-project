@@ -18,6 +18,7 @@ Window::Window(const std::string& title, unsigned int width, unsigned int height
 
 	m_Window = glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
 
+
 	if (!m_Window)
 	{
 		glfwTerminate();

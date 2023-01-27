@@ -29,5 +29,5 @@ private:
 	float m_Fovy = 45.0f;
 	float m_Far = 300.0f;
 	float m_Near = 0.1f;
-	float m_Aspect = 4.0f / 4.0f;
+	float m_Aspect = 16.0 / 9.0f;
 };

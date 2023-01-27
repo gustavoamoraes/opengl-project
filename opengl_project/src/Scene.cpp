@@ -9,8 +9,8 @@ void Scene::OnUpdate()
 {
 	for (Entity* e : m_Entities)
 	{
-		if (e->m_Active)	
-			e->Update();
+		//if (e && e->m_Active)	
+		e->Update();
 	}
 }
 

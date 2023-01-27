@@ -9,9 +9,10 @@ class Entity
 public:
 	virtual void Update();
 	virtual void Start();
+	virtual void SetActive(bool active);
 
-	bool m_Active = true;
 	Scene* m_MyScene;
+	bool m_Active = true;
 };
 
 #else

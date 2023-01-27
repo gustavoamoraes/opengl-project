@@ -15,10 +15,11 @@ class CameraController : public Entity
 
 	private:
 		glm::vec2 m_LastMousePosition;
-		ChunckManager* m_ChunckManager1;
+		ChunckManager* m_ChunckManager;
 
 		float m_Yaw = 0;
 		float m_Pitch = 0;
 		const float m_Sensitivity = 0.001f;
-		const float m_Velocity = 0.25f;
+		const float m_Velocity = 1.0f;
+		glm::vec2 m_LastChunckCoord;
 };

@@ -89,7 +89,7 @@
       <PreprocessorDefinitions>GLEW_STATIC</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)opengl_project\src\core;$(SolutionDir)opengl_project\src;$(SolutionDir)opengl_project\src\vendor;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)opengl_project\src\scenes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -620,6 +620,7 @@
     <ClCompile Include="src\scenes\TestScene\Chunck.cpp" />
     <ClCompile Include="src\scenes\TestScene\ChunckManager.cpp" />
     <ClCompile Include="src\scenes\TestScene\ChunckMesh.cpp" />
+    <ClCompile Include="src\scenes\TestScene\TerrainGenerator.cpp" />
     <ClCompile Include="src\Shader.cpp" />
     <ClCompile Include="src\Scene.cpp" />
     <ClCompile Include="SRC\TextureAtlas.cpp" />

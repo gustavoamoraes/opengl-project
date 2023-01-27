@@ -16,7 +16,7 @@ public:
 	enum class CubeSide { Front, Back, Right, Left, Top, Bottom };
 
 	Mesh m_Mesh;
-	const Chunck* m_MyChunck;
+	Chunck* m_MyChunck;
 
 	void UpdateChunckMesh();
 	void ApplyMesh();
